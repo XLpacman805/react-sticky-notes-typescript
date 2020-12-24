@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { StickyNote } from './types/index';
 import { StickyNoteComponent } from './components/StickyNoteComponent';
-import { getAllStickyNotes, createStickyNote } from './services/IndexedDBService';
+import { getAllStickyNotes, createStickyNote, deleteStickyNote } from './services/IndexedDBService';
 
 type AppState = {
   stickynotes : Array<StickyNote>
@@ -31,11 +31,22 @@ class App extends React.Component<{}, AppState> {
       .catch(err => console.error(err));
   }
 
+  handleDelete(id : string) {
+    deleteStickyNote(id)
+        .then(() => getAllStickyNotes())
+        .then(stickynotes => this.setState({stickynotes: stickynotes})) 
+        .catch(err => console.error(err));
+}
+
   render() {
     return (
       <main>
         {
-          this.state.stickynotes.map(element => <StickyNoteComponent key={element.id} id={element.id} heading={element.heading} body={element.body}></StickyNoteComponent>)
+          this.state.stickynotes
+            .map(stickynote => 
+            <StickyNoteComponent key={stickynote.id} id={stickynote.id} heading={stickynote.heading} body={stickynote.body}>
+              <button onClick={event => this.handleDelete(stickynote.id)}>Delete</button>
+            </StickyNoteComponent>)
         }
         <button onClick={this.handleCreate}>Create</button>
       </main>

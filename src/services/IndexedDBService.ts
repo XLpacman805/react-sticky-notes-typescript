@@ -65,6 +65,18 @@ const createStickyNote = async () : Promise<any> => {
     });
 }
 const updateStickyNote = () => {}
-const deleteStickyNote = () => {}
+const deleteStickyNote = async (key : string) : Promise<any> => {
+    let db = await connect();
+    return await new Promise((resolve, reject) => {
+        let transaction = db.transaction(database.objectStoreName, 'readwrite');
+        let objectStore = transaction.objectStore(database.objectStoreName).delete(key);
+        objectStore.onsuccess = (event : any) => {
+            resolve(event.target.result);
+        }
+        objectStore.onerror = (event : any) => {
+            reject(event.target.error);
+        }
+    });
+}
 
 export { getAllStickyNotes, createStickyNote, updateStickyNote, deleteStickyNote }

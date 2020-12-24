@@ -68,7 +68,7 @@ const updateStickyNote = async (stickynote: StickyNote) : Promise<any> => {
     let db = await connect();
     return await new Promise((resolve, reject) => {
         let transaction = db.transaction(database.objectStoreName, 'readwrite').objectStore(database.objectStoreName);
-        let objectStore = transaction.put(stickynote, stickynote.id);
+        let objectStore = transaction.put(stickynote);
         objectStore.onsuccess = (event : any) => {
             resolve(event.target.result);
         }

@@ -64,7 +64,20 @@ const createStickyNote = async () : Promise<any> => {
         }
     });
 }
-const updateStickyNote = () => {}
+const updateStickyNote = async (stickynote: StickyNote) : Promise<any> => {
+    let db = await connect();
+    return await new Promise((resolve, reject) => {
+        let transaction = db.transaction(database.objectStoreName, 'readwrite').objectStore(database.objectStoreName);
+        let objectStore = transaction.put(stickynote, stickynote.id);
+        objectStore.onsuccess = (event : any) => {
+            resolve(event.target.result);
+        }
+        objectStore.onerror = (event: any) => {
+            reject(event.target.error);
+        }
+    });
+
+}
 const deleteStickyNote = async (key : string) : Promise<any> => {
     let db = await connect();
     return await new Promise((resolve, reject) => {

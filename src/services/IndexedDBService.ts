@@ -22,7 +22,7 @@ const connect = async () : Promise<IDBDatabase> => {
         connectionRequest.onupgradeneeded = (event: any) => {
             let db : IDBDatabase = event.target.result;
             let objectStore = db.createObjectStore(database.objectStoreName, {keyPath: database.objectStoreKeyPath});
-            let stickyNote : StickyNote = {id: uuidv4(), heading: 'Title', body: 'Write your note here.' }
+            let stickyNote : StickyNote = {id: uuidv4(), heading: 'New', body: 'Write your note here.' }
             objectStore.add(stickyNote);
         }
     
@@ -50,7 +50,20 @@ const getAllStickyNotes = async () : Promise<Array<StickyNote>> => {
         }
     });
 }
-const createStickyNote = () => {}
+const createStickyNote = async () : Promise<any> => {
+    let db = await connect();
+    return await new Promise((resolve, reject) => {
+        let transaction :IDBTransaction = db.transaction(database.objectStoreName, 'readwrite');
+        let stickynote : StickyNote = { id: uuidv4(), heading: 'New', body: 'Write your note here.'}
+        let objectStore = transaction.objectStore(database.objectStoreName).add(stickynote);
+        objectStore.onsuccess = (event : any) => {
+            resolve(event.target.result);
+        }
+        objectStore.onerror = (event : any) => {
+            reject(event.target.error);
+        }
+    });
+}
 const updateStickyNote = () => {}
 const deleteStickyNote = () => {}
 

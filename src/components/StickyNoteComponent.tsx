@@ -1,25 +1,38 @@
 import React from 'react';
 import { StickyNote } from '../types/index';
+import { updateStickyNote } from '../services/IndexedDBService';
 
-export class StickyNoteComponent extends React.Component<StickyNote, {}> {
+
+export class StickyNoteComponent extends React.Component<StickyNote, StickyNote> {
+    timeout: any;
     constructor(props : StickyNote) {
         super(props);
-        this.state = {};
+        this.state = { 
+            id : props.id, 
+            heading: props.heading,
+            body : props.body,
+        };
+        this.timeout = null;
+        this.handleChange = this.handleChange.bind(this);
     }
+    
+     handleChange(event : any, type: string) {
+        clearTimeout(this.timeout);
 
-    /**
-     * Need to write a handleChange method. 
-     * Need to replace lable and p with inputs so that a user can type. 
-     * The handleChange method should listen for changes. 
-     * After a 3 seconds of no changes, it should then write to the indexedDB. 
-     * I don't want to have a new transation on every keystroke. That would be expensive for a real db.
-     */
+        if (type === 'heading')
+            this.setState({heading: event.target.value});
+        else if (type === 'body') {
+            this.setState({body: event.target.value});
+        }
+        // After 3 seconds of no new activity, save this sticky note data to the indexed db. 
+        this.timeout = setTimeout(() => updateStickyNote({id: this.state.id, heading: this.state.heading, body: this.state.body}), 3000);
+     }
 
     render() {
         return (
-            <div className="stickynote" id={this.props.id}>
-                <label>{this.props.heading}</label>
-                <p>{this.props.body}</p>
+            <div className="stickynote" id={this.state.id}>
+                <input onChange={e => this.handleChange(e, 'heading')} className="heading" type="text" value={this.state.heading} />
+                <input onChange={e => this.handleChange(e, 'body')} className="body" type="text" value={this.state.body} />
                 {this.props.children}
             </div>
         )

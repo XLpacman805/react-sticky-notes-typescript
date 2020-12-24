@@ -1,0 +1,7 @@
+.stickynote {
+    flex: 0 1 auto;
+    width: 20rem;
+    height: 14rem;
+    background-color: beige;
+    color: black; 
+}

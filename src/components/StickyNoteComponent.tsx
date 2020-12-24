@@ -1,6 +1,7 @@
 import React from 'react';
 import { StickyNote } from '../types/index';
 import { updateStickyNote } from '../services/IndexedDBService';
+import './StickyNoteComponent.css';
 
 
 export class StickyNoteComponent extends React.Component<StickyNote, StickyNote> {
@@ -32,7 +33,9 @@ export class StickyNoteComponent extends React.Component<StickyNote, StickyNote>
         return (
             <div className="stickynote" id={this.state.id}>
                 <input onChange={e => this.handleChange(e, 'heading')} className="heading" type="text" value={this.state.heading} />
+                <br />
                 <input onChange={e => this.handleChange(e, 'body')} className="body" type="text" value={this.state.body} />
+                <br />
                 {this.props.children}
             </div>
         )

@@ -7,3 +7,10 @@
   flex-flow: row wrap;
   justify-content: center;
 }
+
+/**Tablet and Above **/
+@media only screen and (min-width: 640px) {
+  .stickynote-container {
+    justify-content: space-evenly;
+  }
+}

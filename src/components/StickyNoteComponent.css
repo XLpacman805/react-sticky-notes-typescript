@@ -1,7 +1,25 @@
 .stickynote {
     flex: 0 1 auto;
-    width: 20rem;
+    width: 80vw;
     height: 14rem;
-    background-color: beige;
+    background-color: #fff9c4;
     color: black; 
+    box-shadow: 0px 0px 3px 0px black;
 }
+/** Tablet and Above **/
+@media only screen and (min-width: 425px) {
+    .stickynote {
+        width: 20rem;
+    }
+}
+
+.stickynote input {
+    border: none;
+    background-color: inherit;
+}
+
+.stickynote-heading {
+    font-weight: 700;
+    font-size: large;
+}
+

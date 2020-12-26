@@ -40,18 +40,20 @@ class App extends React.Component<{}, AppState> {
 
   render() {
     return (
-      <main className="stickynote-container">
-        {
-          this.state.stickynotes
-            .map(stickynote => 
-              <div>
-                <StickyNoteComponent key={stickynote.id} id={stickynote.id} heading={stickynote.heading} body={stickynote.body}>
-                  <button onClick={event => this.handleDelete(stickynote.id)}>Delete</button>
-                </StickyNoteComponent>
-                <br />
-              </div>
-            )
-        }
+      <main>
+        <div className="stickynote-container" >
+          {
+            this.state.stickynotes
+              .map(stickynote => 
+                <div>
+                  <StickyNoteComponent key={stickynote.id} id={stickynote.id} heading={stickynote.heading} body={stickynote.body}>
+                    <button onClick={event => this.handleDelete(stickynote.id)}>Delete</button>
+                  </StickyNoteComponent>
+                  <br />
+                </div>
+              )
+          }
+        </div>
         <button onClick={this.handleCreate}>Create</button>
       </main>
     );

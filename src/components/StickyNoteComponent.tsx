@@ -32,9 +32,9 @@ export class StickyNoteComponent extends React.Component<StickyNote, StickyNote>
     render() {
         return (
             <div className="stickynote" id={this.state.id}>
-                <input onChange={e => this.handleChange(e, 'heading')} className="heading" type="text" value={this.state.heading} />
+                <input className="stickynote-heading" onChange={e => this.handleChange(e, 'heading')} type="text" value={this.state.heading} />
                 <br />
-                <input onChange={e => this.handleChange(e, 'body')} className="body" type="text" value={this.state.body} />
+                <input className="stickynote-body" onChange={e => this.handleChange(e, 'body')} type="text" value={this.state.body} />
                 <br />
                 {this.props.children}
             </div>

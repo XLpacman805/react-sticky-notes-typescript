@@ -23,6 +23,24 @@
     max-width: 99%;
 }
 
+.stickynote input:focus {
+  outline: none;
+}
+
+.stickynote textarea {
+  border: none;
+  background-color: inherit;
+  width: 99%;
+  max-width: 99%;
+  max-height: 20vh;
+  height: 18vh;
+  resize: none;
+}
+
+.stickynote textarea:focus {
+  outline: none;
+}
+
 .stickynote-heading {
     font-weight: 700;
     font-size: large;

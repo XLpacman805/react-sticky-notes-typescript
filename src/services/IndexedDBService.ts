@@ -22,7 +22,7 @@ const connect = async () : Promise<IDBDatabase> => {
         connectionRequest.onupgradeneeded = (event: any) => {
             let db : IDBDatabase = event.target.result;
             let objectStore = db.createObjectStore(database.objectStoreName, {keyPath: database.objectStoreKeyPath});
-            let stickyNote : StickyNote = {id: uuidv4(), heading: 'New', body: 'Write your note here.' }
+            let stickyNote : StickyNote = {id: uuidv4(), heading: 'New', body: 'Write your note here.', lastModified: Date.now()}
             objectStore.add(stickyNote);
         }
     
@@ -42,7 +42,8 @@ const getAllStickyNotes = async () : Promise<Array<StickyNote>> => {
         let transaction = db.transaction(database.objectStoreName, 'readonly');
         let objectStore = transaction.objectStore(database.objectStoreName).getAll();
         objectStore.onsuccess = (event : any) => {
-            let stickyNotes : Array<StickyNote> = event.target.result;
+            let stickyNotes : Array<StickyNote> = event.target.result.sort((a : StickyNote, b : StickyNote) => b.lastModified - a.lastModified); // sort the results so that the most recently modified sticky note is first.
+            console.log(stickyNotes)
             resolve(stickyNotes);
         }
         objectStore.onerror = (event : any) => {
@@ -54,7 +55,7 @@ const createStickyNote = async () : Promise<any> => {
     let db = await connect();
     return await new Promise((resolve, reject) => {
         let transaction :IDBTransaction = db.transaction(database.objectStoreName, 'readwrite');
-        let stickynote : StickyNote = { id: uuidv4(), heading: 'New', body: 'Write your note here.'}
+        let stickynote : StickyNote = { id: uuidv4(), heading: 'New', body: 'Write your note here.', lastModified: Date.now()}
         let objectStore = transaction.objectStore(database.objectStoreName).add(stickynote);
         objectStore.onsuccess = (event : any) => {
             resolve(event.target.result);

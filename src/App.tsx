@@ -13,7 +13,7 @@ class App extends React.Component<{}, AppState> {
   constructor(props: {}) {
     super(props);
     this.state = {
-      stickynotes : [{id: 'initial', heading: ' ', body: 'loading...'}]
+      stickynotes : [{id: 'initial', heading: ' ', body: 'loading...', lastModified: Date.now()}]
     }
     this.handleCreate = this.handleCreate.bind(this);
   }
@@ -49,7 +49,7 @@ class App extends React.Component<{}, AppState> {
               this.state.stickynotes
                 .map(stickynote => 
                   <div key={stickynote.id} >
-                    <StickyNoteComponent id={stickynote.id} heading={stickynote.heading} body={stickynote.body}>
+                    <StickyNoteComponent id={stickynote.id} heading={stickynote.heading} body={stickynote.body} lastModified={stickynote.lastModified}>
                       <button onClick={event => this.handleDelete(stickynote.id)}>Delete</button>
                     </StickyNoteComponent>
                     <br />

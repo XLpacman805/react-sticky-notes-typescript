@@ -50,7 +50,7 @@ class App extends React.Component<{}, AppState> {
                 .map(stickynote => 
                   <div key={stickynote.id} >
                     <StickyNoteComponent id={stickynote.id} heading={stickynote.heading} body={stickynote.body} lastModified={stickynote.lastModified}>
-                      <button onClick={event => this.handleDelete(stickynote.id)}>Delete</button>
+                      <button className="button-delete" onClick={event => this.handleDelete(stickynote.id)}> ❌ </button>
                     </StickyNoteComponent>
                     <br />
                   </div>

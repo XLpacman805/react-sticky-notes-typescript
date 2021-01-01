@@ -57,7 +57,7 @@ class App extends React.Component<{}, AppState> {
                 )
             }
           </div>
-          <button onClick={this.handleCreate}>Create</button>
+          <button className="button-create" onClick={this.handleCreate}>+</button>
         </main>
       </div>
     );

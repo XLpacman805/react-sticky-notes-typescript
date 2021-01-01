@@ -8,9 +8,36 @@
   justify-content: center;
 }
 
+.button-create {
+  border-radius: 4rem;
+  width: 4rem;
+  height: 4rem;
+  background-color: #6002EE;
+  color: white;
+  border: none;
+  outline: none;
+  font-size: 2.1rem;
+  box-shadow: 0px 1px 3px 0px black;
+  margin-left: 1rem;
+  position: fixed;
+  top: 90vh;
+}
+
+.button-create:hover {
+  background-color: #7224e6;
+}
+.button-create:focus {
+  background-color: #6002EE;
+}
+
 /**Tablet and Above **/
 @media only screen and (min-width: 640px) {
   .stickynote-container {
     justify-content: space-evenly;
+  }
+
+  .button-create {
+    position: initial;
+    top: initial;
   }
 }

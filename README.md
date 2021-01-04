@@ -2,6 +2,8 @@
 
 This is a sticky notes progressive web application. Users can create, view, edit, and delete sticky notes, even while offline! It utilizes Indexed DB to store the sticky note data. 
 
+[ ] Need to add service worker 
+
 ## Available Scripts
 
 In the project directory, you can run:

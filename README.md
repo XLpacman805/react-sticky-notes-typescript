@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Sticky Notes Application #
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a sticky notes progressive web application. Users can create, view, edit, and delete sticky notes, even while offline! It utilizes Indexed DB to store the sticky note data. 
 
 ## Available Scripts
 

@@ -1,6 +1,7 @@
 # Sticky Notes Application #
 
 This is a sticky notes progressive web application. Users can create, view, edit, and delete sticky notes, even while offline! It utilizes Indexed DB to store the sticky note data. 
+https://stickynotes-app-001.web.app/
 
 [ ] Need to add service worker 
 
